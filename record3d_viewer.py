@@ -153,17 +153,15 @@ class ImageDepthPlayer:
         """Update depth contrast and refresh display."""
         new_contrast = self.contrast_var.get()
 
-        # Verifica che il valore sia entro i limiti del cursore
+        # check value is still within limits
         new_contrast = max(0.1, min(5.0, new_contrast))
 
-        # Aggiorna solo se il valore è cambiato
+        # update only if value changed
         if self.depth_contrast != new_contrast:
             self.depth_contrast = new_contrast
             self.contrast_label.config(text=f"{self.depth_contrast:.1f}x")
 
-            # Non chiamare self.contrast_slider.set() - questo causa il problema
-
-            # Se abbiamo dati di profondità correnti, aggiorna la visualizzazione
+            # if we have fresh depth data, update the display
             if self.current_depth_data is not None:
                 self.update_depth_display()
 
