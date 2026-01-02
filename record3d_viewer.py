@@ -2,7 +2,7 @@ import os
 import numpy as np
 import cv2
 import tkinter as tk
-from tkinter import filedialog, ttk
+from tkinter import filedialog, ttk, messagebox
 from PIL import Image, ImageTk
 
 # Attempt to import OpenEXR and Imath
@@ -39,7 +39,7 @@ class ImageDepthPlayer:
         self.current_frame = 0
         self.total_frames = 0
         self.is_playing = False
-        self.play_speed = 100  # ms between frames (10 fps by default)
+        self.play_speed = 33  # ms between frames (~30 fps by default)
         self.depth_contrast = 1.0  # Contrast multiplier for depth visualization
         self.current_depth_data = None  # Cache current depth data
 
@@ -288,13 +288,13 @@ class ImageDepthPlayer:
     def change_speed(self, event=None):
         speed = self.speed_combo.get()
         if speed == "0.5x":
-            self.play_speed = 200  # 5 fps
+            self.play_speed = 66  # 60 fps
         elif speed == "1x":
-            self.play_speed = 100  # 10 fps - FIXME should be set to the framerate of Record3D
+            self.play_speed = 33   # ~30 fps - Record3D default
         elif speed == "2x":
-            self.play_speed = 50  # 20 fps
+            self.play_speed = 16  # 15 fps
         elif speed == "5x":
-            self.play_speed = 20  # 50 fps
+            self.play_speed = 7  # 6 fps
 
     def show_current_frame(self):
         if self.current_frame >= self.total_frames:
